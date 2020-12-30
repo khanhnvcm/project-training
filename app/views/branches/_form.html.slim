@@ -1,0 +1,53 @@
+.form-group
+  = form_with model: @branch, local: true do |form|
+    .row
+      .col-2
+      .col-10
+        - if @branch.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@branch.errors.count, "error")
+              | prohibited
+              | this branch from being saved:
+            ul
+              - @branch.errors.full_messages.each do |msg|
+                li= msg
+    .row
+      .col-2
+      .col-2
+        = form.label :name
+      .col-8
+        = form.text_field :name, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :city
+      .col-8
+        = form.text_field :city, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :address
+      .col-8
+        = form.text_area :address, :cols => '50'    
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :phone
+      .col-8
+        = form.text_field :phone, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :email
+      .col-8
+        = form.text_field :email, :size => 50
+    br
+    .row
+      .col-4
+      .col-8
+        = form.submit

@@ -1,0 +1,24 @@
+h1.text-center  List of Branches
+=link_to 'Add new branch', new_branch_path, class: 'btn btn-primary'
+br
+table.table.table-striped.table-dark
+  thead
+    tr
+      th ID
+      th Name
+      th City 
+      th Address
+      th Phone
+      th Email
+      th Actions
+  - @branches.each do |branch|
+    tr
+      td= branch.id
+      td= branch.name
+      td= branch.city 
+      td= branch.address
+      td= branch.phone
+      td= branch.email
+      td
+        = link_to 'Show', branch_path(branch), class: 'btn btn-primary'
+        = link_to 'Edit', edit_branch_path(branch), class: 'btn btn-primary'
