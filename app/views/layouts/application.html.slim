@@ -9,17 +9,45 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     css:
-      
+      li.list-group-item:hover {
+        background-color: silver;
+      }
+
+      .content {
+        border-top: 2px solid silver;
+      }
+    javascript:
+      $(document).on('turbolinks:load', function() {
+        var path = window.location.pathname;
+        if (path == '/') {$('.list-group-item:contains("Branch")').addClass('active');}
+        $('.list-group-item').each(function(){
+          var name = $(this).text().toLowerCase().substring(0,3);
+          if (path.includes(name)) {$(this).addClass('active');}
+        });
+      });
+
   body
     .row
-      .col-10
-      .col-2
+      .col-11.text-right
         - if user_signed_in?
           span.account= current_user.email
           br
-          = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-dark'
+          = link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-dark'
 
     .container-fluid
     p.notice
     p.alert
-    = yield
+
+    .row.content
+      .col-2
+        .list-group 
+          =link_to 'Branch', branches_path, class: 'list-group-item btn'
+          =link_to 'Manufacturer', manufacturers_path, class: 'list-group-item btn'
+          =link_to 'Model', models_path, class: 'list-group-item btn'
+          =link_to 'Color', colors_path, class: 'list-group-item btn'
+          =link_to 'Memory', memories_path, class: 'list-group-item btn'
+          =link_to 'Status', statuses_path, class: 'list-group-item btn'
+          =link_to 'Product', products_path, class: 'list-group-item btn'
+          =link_to 'Employee', employees_path, class: 'list-group-item btn'
+      .col-10
+          = yield

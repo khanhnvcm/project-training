@@ -9,17 +9,11 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     css:
-      li.list-group-item:hover {
-        background-color: silver;
-      }
-
-      .content {
-        border-top: 2px solid silver;
-      }
-
+      
   body
     .row
-      .col-11.text-right
+      .col-10
+      .col-2
         - if user_signed_in?
           span.account= current_user.email
           br
@@ -28,17 +22,4 @@ html
     .container-fluid
     p.notice
     p.alert
-
-    .row.content
-      .col-2
-        ul.list-group 
-        li.list-group-item.active.btn Branch
-        li.list-group-item.btn Manufacturer
-        li.list-group-item.btn Model
-        li.list-group-item.btn Color
-        li.list-group-item.btn Memory
-        li.list-group-item.btn Status
-        li.list-group-item.btn Product
-        li.list-group-item.btn Employee
-      .col-10
-          = yield
+    = yield

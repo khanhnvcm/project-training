@@ -1,0 +1,25 @@
+.form-group
+  = form_with model: @manufacturer, local: true do |form|
+    .row
+      .col-2
+      .col-10
+        - if @manufacturer.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@manufacturer.errors.count, "error")
+              | prohibited
+              | this branch from being saved:
+            ul
+              - @manufacturer.errors.full_messages.each do |msg|
+                li= msg
+    .row
+      .col-2
+      .col-2
+        = form.label :name
+      .col-8
+        = form.text_field :name, :size => 50
+    br
+    .row
+      .col-4
+      .col-8
+        = form.submit
