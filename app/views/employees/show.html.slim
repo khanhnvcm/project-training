@@ -1,0 +1,27 @@
+h1.text-center  Information
+.row
+  .col-1
+  .col-11
+    ul
+      li 
+        |Name: 
+        = @employee.name
+      li 
+        |Birthday: 
+        = @employee.birthday
+      li 
+        |Position: 
+        = @employee.position
+      li 
+        |Branch: 
+        = Branch.find(@employee.branch_id).name 
+      li 
+        |Phone: 
+        = @employee.phone
+      li 
+        |Email: 
+        = @employee.email 
+      li 
+        |Address: 
+        = @employee.address
+h1.text-center  List of Products

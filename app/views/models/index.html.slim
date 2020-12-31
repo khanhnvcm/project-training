@@ -1,0 +1,19 @@
+h1.text-center  List of Models
+=link_to 'Add new model', new_model_path, class: 'btn btn-primary mb-4'
+br
+table.table.table-striped
+  thead
+    tr
+      th ID
+      th Name
+      th Manufacturer 
+      th Actions
+  - @models.each do |model|
+    tr
+      td= model.id
+      td= model.name
+      td= Manufacturer.find(model.manufacturer_id).name
+      td
+        = link_to 'Show', model_path(model), class: 'btn btn-primary mr-2'
+        = link_to 'Edit', edit_model_path(model), class: 'btn btn-primary mr-2'
+        = link_to 'Destroy', model_path(model), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-primary'

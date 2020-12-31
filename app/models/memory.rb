@@ -13,4 +13,5 @@
 #
 class Memory < ApplicationRecord
 	has_many :products
+	validates :amount, presence: true, uniqueness: true
 end

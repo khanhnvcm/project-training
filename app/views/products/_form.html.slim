@@ -1,0 +1,88 @@
+.form-group
+  = form_with model: @product, local: true do |form|
+    .row
+      .col-2
+      .col-10
+        - if @product.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@product.errors.count, "error")
+              |  prohibited
+              |  this product from being saved:
+            ul
+              - @product.errors.full_messages.each do |msg|
+                li= msg
+    .row
+      .col-2
+      .col-2
+        = form.label :model_id
+      .col-8
+        = select(:product, :model_id, Model.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :memory_id
+      .col-8
+        = select(:product, :memory_id, Memory.all.collect {|p| [ p.amount, p.id ] }, { include_blank: true })
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :color_id
+      .col-8
+        = select(:product, :color_id, Color.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :branch_id
+      .col-8
+        = select(:product, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :status_id
+      .col-8
+        = select(:product, :status_id, Status.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :employee_id, 'Inspector'
+      .col-8
+        = select(:product, :employee_id, Employee.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :price
+      .col-8
+        = form.number_field :price, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :imei
+      .col-8
+        = form.text_field :imei, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :serial_number
+      .col-8
+        = form.text_field :serial_number, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :description
+      .col-8
+        = form.text_area :description, :cols => '50'
+    br
+    .row
+      .col-4
+      .col-8
+        = form.submit

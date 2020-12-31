@@ -1,0 +1,25 @@
+.form-group
+  = form_with model: @memory, local: true do |form|
+    .row
+      .col-2
+      .col-10
+        - if @memory.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@memory.errors.count, "error") 
+              |  prohibited
+              |  this memory from being saved:
+            ul
+              - @memory.errors.full_messages.each do |msg|
+                li= msg
+    .row
+      .col-2
+      .col-2
+        = form.label :amount, 'Amount (GB)'
+      .col-8
+        = form.number_field :amount, :size => 50
+    br
+    .row
+      .col-4
+      .col-8
+        = form.submit

@@ -1,0 +1,60 @@
+.form-group
+  = form_with model: @model, local: true do |form|
+    .row
+      .col-2
+      .col-10
+        - if @model.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@model.errors.count, "error")
+              |  prohibited
+              |  this model from being saved:
+            ul
+              - @model.errors.full_messages.each do |msg|
+                li= msg
+    .row
+      .col-2
+      .col-2
+        = form.label :manufacturer_id
+      .col-8
+        = select(:model, :manufacturer_id, Manufacturer.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :name
+      .col-8
+        = form.text_field :name, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :display
+      .col-8
+        = form.text_field :display, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :camera
+      .col-8
+        = form.text_field :camera, :cols => 50    
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :battery
+      .col-8
+        = form.text_field :battery, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :detail
+      .col-8
+        = form.text_area :detail, :cols => '50'
+    br
+    .row
+      .col-4
+      .col-8
+        = form.submit

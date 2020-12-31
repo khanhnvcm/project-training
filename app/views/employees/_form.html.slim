@@ -1,0 +1,67 @@
+.form-group
+  = form_with model: @employee, local: true do |form|
+    .row
+      .col-2
+      .col-10
+        - if @employee.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@employee.errors.count, "error")
+              |  prohibited
+              |  this employee from being saved:
+            ul
+              - @employee.errors.full_messages.each do |msg|
+                li= msg
+    .row
+      .col-2
+      .col-2
+        = form.label :name
+      .col-8
+        = form.text_field :name, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :position
+      .col-8
+        = form.text_field :position, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :branch_id
+      .col-8
+        = select(:employee, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })    
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :birthday
+      .col-8
+        = form.date_field :birthday, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :phone
+      .col-8
+        = form.text_field :phone, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :email
+      .col-8
+        = form.text_field :email, :size => 50
+    br
+    .row
+      .col-2
+      .col-2
+        = form.label :address
+      .col-8
+        = form.text_field :address, :size => 50
+    br
+    .row
+      .col-4
+      .col-8
+        = form.submit

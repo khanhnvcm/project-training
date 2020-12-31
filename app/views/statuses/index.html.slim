@@ -1,0 +1,14 @@
+h1.text-center  List of Statuses
+=link_to 'Add new status', new_status_path, class: 'btn btn-primary mb-4'
+br
+.row
+  .col-1
+  .col-11
+    table
+      - @statuses.each do |status|
+        .row
+          .col-3
+            h5
+              li = status.name
+          .col-9
+            = link_to 'Edit', edit_status_path(status), class: 'btn btn-primary mb-2'

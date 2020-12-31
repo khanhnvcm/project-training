@@ -5,6 +5,10 @@ class BranchesController < ApplicationController
     @branches = Branch.all
   end
 
+  def show
+    @branch = Branch.find(params[:id])
+  end
+
   def new
     @branch = Branch.new
   end

@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root 'branches#index'
 
   resources :branches, except: :destroy
-  resources :employees, :manufacturers, :models, :colors, :memories, :statuses, :products 
+  resources :manufacturers, :colors, :memories, :statuses, except: [:destroy, :show]
+  resources :employees, :models, :products
   devise_for :users
   
 end

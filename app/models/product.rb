@@ -44,4 +44,6 @@ class Product < ApplicationRecord
   belongs_to :status
   belongs_to :employee
   has_many :import_histories
+  validates :imei, :price, :serial_number, presence: true
+	validates :imei, uniqueness: true
 end

@@ -1,0 +1,25 @@
+.form-group
+  = form_with model: @color, local: true do |form|
+    .row
+      .col-2
+      .col-10
+        - if @color.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@color.errors.count, "error") 
+              |  prohibited
+              |  this color from being saved:
+            ul
+              - @color.errors.full_messages.each do |msg|
+                li= msg
+    .row
+      .col-2
+      .col-2
+        = form.label :name
+      .col-8
+        = form.text_field :name, :size => 50
+    br
+    .row
+      .col-4
+      .col-8
+        = form.submit

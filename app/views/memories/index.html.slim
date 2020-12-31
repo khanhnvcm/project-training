@@ -1,0 +1,16 @@
+h1.text-center  List of Memories
+=link_to 'Add new memory', new_memory_path, class: 'btn btn-primary mb-4'
+br
+.row
+  .col-1
+  .col-11
+    table
+      - @memories.each do |memory|
+        .row
+          .col-3
+            h5
+              li 
+                = memory.amount
+                |  GB
+          .col-9
+            = link_to 'Edit', edit_memory_path(memory), class: 'btn btn-primary mb-2'

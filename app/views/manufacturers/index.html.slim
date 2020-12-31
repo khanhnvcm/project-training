@@ -1,13 +1,14 @@
 h1.text-center  List of Manufacturers
-=link_to 'Add new manufacturer', new_manufacturer_path, class: 'btn btn-primary'
+=link_to 'Add new manufacturer', new_manufacturer_path, class: 'btn btn-primary mb-4'
 br
-.row style='margin-top: 40px'
+.row
   .col-1
   .col-11
     table
       - @manufacturers.each do |manufacturer|
         .row
           .col-3
-            li = manufacturer.name
+            h5
+              li = manufacturer.name
           .col-9
-            = link_to 'Edit', edit_manufacturer_path(manufacturer), class: 'btn btn-primary'
+            = link_to 'Edit', edit_manufacturer_path(manufacturer), class: 'btn btn-primary mb-2'

@@ -24,4 +24,6 @@
 class Model < ApplicationRecord
   belongs_to :manufacturer
   has_many :products
+  validates :name, :battery, :camera, :display, presence: true
+	validates :name, uniqueness: true
 end

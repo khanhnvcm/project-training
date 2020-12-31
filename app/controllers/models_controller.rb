@@ -1,39 +1,45 @@
-class BranchesController < ApplicationController
+class ModelsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @branches = Branch.all
+    @models = Model.all
   end
 
   def new
-    @branch = Branch.new
+    @model = Model.new
   end
 
   def create
-    @branch = Branch.new(branch_params)
-    if @branch.save
-  		redirect_to branches_path
+    @model = Model.new(model_params)
+    if @model.save
+  		redirect_to models_path
     else
-  		render 'new'
+      render 'new'
   	end
   end
   
   def edit
-    @branch = Branch.find(params[:id])
+    @model = Model.find(params[:id])
   end
 
   def update
-    @branch = Branch.find(params[:id])
-    if @branch.update(branch_params)
-  		redirect_to branches_path
+    @model = Model.find(params[:id])
+    if @model.update(model_params)
+  		redirect_to models_path
     else
   		render 'edit'
   	end
   end
 
+  def destroy
+    @model = Model.find(params[:id])
+    @model.destroy
+    redirect_to models_path
+  end
+
   private
-  def branch_params
-    params.require(:branch).permit(:name, :city, :address, :phone, :email)
+  def model_params
+    params.require(:model).permit(:name, :battery, :camera, :display, :manufacturer_id, :detail)
   end
 
 end
