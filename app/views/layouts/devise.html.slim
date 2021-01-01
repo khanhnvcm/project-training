@@ -9,17 +9,17 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     css:
+
+    javascript:
+      $(document).on('turbolinks:load', function() {
+        $(".alert" ).fadeOut(4000);
+      });
       
   body
-    .row
-      .col-10
-      .col-2
-        - if user_signed_in?
-          span.account= current_user.email
-          br
-          = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-dark'
-
-    .container-fluid
-    p.notice
-    p.alert
+    .container-fluid.text-center style='height: 50px'
+      -unless notice.nil?
+        .alert.alert-success = notice
+    .container-fluid.text-center style='height: 50px'
+      -unless alert.nil?
+        .alert.alert-danger = alert
     = yield

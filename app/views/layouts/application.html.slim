@@ -18,6 +18,7 @@ html
       }
     javascript:
       $(document).on('turbolinks:load', function() {
+        $(".alert" ).fadeOut(4000);
         var path = window.location.pathname;
         if (path == '/') {$('.list-group-item:contains("Branch")').addClass('active');}
         $('.list-group-item').each(function(){
@@ -34,9 +35,12 @@ html
           br
           = link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-dark'
 
-    .container-fluid
-    p.notice
-    p.alert
+    .container-fluid.text-center style='height: 50px'
+      -unless notice.nil?
+        .alert.alert-success = notice
+    .container-fluid.text-center style='height: 50px'
+      -unless alert.nil?
+        .alert.alert-danger = alert
 
     .row.content
       .col-2
