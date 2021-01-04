@@ -22,8 +22,10 @@
 #  fk_rails_...  (manufacturer_id => manufacturers.id)
 #
 class Model < ApplicationRecord
+  has_many_attached :images
   belongs_to :manufacturer
   has_many :products
+  
   validates :name, :battery, :camera, :display, presence: true
 	validates :name, uniqueness: true
 end

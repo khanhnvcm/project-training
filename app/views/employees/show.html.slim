@@ -1,7 +1,9 @@
 h1.text-center  Information
 .row
-  .col-1
-  .col-11
+  .col-2
+    - if @employee.image.attached?
+      = image_tag @employee.image, size:"200x200"
+  .col-10
     ul
       li 
         |Name: 
@@ -24,4 +26,4 @@ h1.text-center  Information
       li 
         |Address: 
         = @employee.address
-h1.text-center  List of Products
+h1.text-center  List of Products inspected

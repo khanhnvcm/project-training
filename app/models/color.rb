@@ -12,6 +12,8 @@
 #  index_colors_on_name  (name) UNIQUE
 #
 class Color < ApplicationRecord
+	has_one_attached :image
 	has_many :products
+	
 	validates :name, presence: true, uniqueness: true
 end

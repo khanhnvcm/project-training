@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @products = Product.all
+    @products = Product.all.page(params[:page])
   end
 
   def show
@@ -43,6 +43,20 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:model_id, :memory_id, :color_id, :branch_id, :status_id, :price, :imei, :serial_number, :employee_id, :available, :sold, :description)
+    params.require(:product).permit(
+      :model_id,
+      :memory_id,
+      :color_id,
+      :branch_id,
+      :status_id,
+      :price,
+      :imei,
+      :serial_number,
+      :employee_id,
+      :available,
+      :sold,
+      :description,
+      images: []
+    )
   end
 end

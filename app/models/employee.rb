@@ -23,8 +23,10 @@
 #  fk_rails_...  (branch_id => branches.id)
 #
 class Employee < ApplicationRecord
+  has_one_attached :image
   belongs_to :branch
   has_many :products
+  
   validates :name, :position, :birthday, :phone, :email, :address, presence: true
 	validates :email, uniqueness: true
 end

@@ -19,6 +19,7 @@ class Branch < ApplicationRecord
 	has_many :products
 	has_many :employees
 	has_many :import_histories
+	
 	validates :name, :city, :address, :phone, :email, presence: true
 	validates :name, :email, uniqueness: true
 end

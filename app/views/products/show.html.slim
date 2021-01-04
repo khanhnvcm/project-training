@@ -1,1 +1,18 @@
 h1.text-center  Show Product (soon)
+.row
+  .col-4
+    #ModelCarousel.carousel.slide data-ride="carousel" style="background-color: grey; width: 500px;"
+      ol.carousel-indicators
+        - @product.images.each_with_index do |image, index|
+          li class=("#{index == 0 ? 'active' : ''}") data-slide-to=index data-target="#ModelCarousel" 
+
+      .carousel-inner.text-center
+        - @product.images.each_with_index do |image, index|
+          div class=("carousel-item #{index == 0 ? 'active' : ''}") style="margin-bottom: 50px"
+            = image_tag image, size:"300x500"
+      a.carousel-control-prev data-slide="prev" href="#ModelCarousel" role="button" 
+        span.carousel-control-prev-icon aria-hidden="true" 
+        span.sr-only Previous
+      a.carousel-control-next data-slide="next" href="#ModelCarousel" role="button" 
+        span.carousel-control-next-icon aria-hidden="true" 
+        span.sr-only Next

@@ -43,6 +43,6 @@ class EmployeesController < ApplicationController
 
   private
   def employee_params
-    params.require(:employee).permit(:name, :position, :birthday, :phone, :email, :address, :branch_id)
+    params.require(:employee).permit(:name, :position, :birthday, :phone, :email, :address, :branch_id, :image)
   end
 end

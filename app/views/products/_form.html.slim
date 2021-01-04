@@ -83,6 +83,13 @@
         = form.text_area :description, :cols => '50'
     br
     .row
+      .col-2
+      .col-2
+        = form.label :images
+      .col-8
+        = form.file_field :images, multiple: true
+    br
+    .row
       .col-4
       .col-8
         = form.submit

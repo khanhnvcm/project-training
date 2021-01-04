@@ -5,6 +5,10 @@ class ModelsController < ApplicationController
     @models = Model.all
   end
 
+  def show
+    @model = Model.find(params[:id])
+  end
+
   def new
     @model = Model.new
   end
@@ -39,7 +43,7 @@ class ModelsController < ApplicationController
 
   private
   def model_params
-    params.require(:model).permit(:name, :battery, :camera, :display, :manufacturer_id, :detail)
+    params.require(:model).permit(:name, :battery, :camera, :display, :manufacturer_id, :detail, images: [])
   end
 
 end

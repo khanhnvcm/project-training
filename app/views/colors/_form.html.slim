@@ -20,6 +20,13 @@
         = form.text_field :name, :size => 50
     br
     .row
+      .col-2
+      .col-2
+        = form.label :image
+      .col-8
+        = form.file_field :image
+    br
+    .row
       .col-4
       .col-8
         = form.submit

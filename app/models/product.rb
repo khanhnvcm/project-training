@@ -37,6 +37,7 @@
 #  fk_rails_...  (status_id => statuses.id)
 #
 class Product < ApplicationRecord
+  has_many_attached :images
   belongs_to :model
   belongs_to :memory
   belongs_to :color
@@ -44,6 +45,7 @@ class Product < ApplicationRecord
   belongs_to :status
   belongs_to :employee
   has_many :import_histories
+  
   validates :imei, :price, :serial_number, presence: true
 	validates :imei, uniqueness: true
 end

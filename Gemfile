@@ -21,7 +21,6 @@ gem 'puma', '~> 4.1'
 # Views
 #
 gem 'bootstrap', '~> 5.0.0.alpha3'
-gem 'jquery-rails'
 gem 'sass-rails', '>= 6'
 gem 'slim-rails'
 gem 'ransack'
