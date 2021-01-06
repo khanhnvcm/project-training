@@ -20,12 +20,13 @@
 #
 # Indexes
 #
-#  index_products_on_branch_id    (branch_id)
-#  index_products_on_color_id     (color_id)
-#  index_products_on_employee_id  (employee_id)
-#  index_products_on_memory_id    (memory_id)
-#  index_products_on_model_id     (model_id)
-#  index_products_on_status_id    (status_id)
+#  index_products_on_branch_id               (branch_id)
+#  index_products_on_color_id                (color_id)
+#  index_products_on_employee_id             (employee_id)
+#  index_products_on_imei_and_serial_number  (imei,serial_number) UNIQUE
+#  index_products_on_memory_id               (memory_id)
+#  index_products_on_model_id                (model_id)
+#  index_products_on_status_id               (status_id)
 #
 # Foreign Keys
 #
@@ -44,8 +45,18 @@ class Product < ApplicationRecord
   belongs_to :branch
   belongs_to :status
   belongs_to :employee
-  has_many :import_histories
+  has_many :import_histories, dependent: :destroy
   
   validates :imei, :price, :serial_number, presence: true
-	validates :imei, uniqueness: true
+  validates :imei, uniqueness: true
+  validates :price, numericality: { greater_than: 0 }
+
+  
+  after_commit :create_import_history, on: [:create, :update]
+
+  private
+
+	def create_import_history
+    ImportHistory.create(product_id: self.id, branch_id: self.branch_id)
+  end
 end

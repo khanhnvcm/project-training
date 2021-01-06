@@ -13,7 +13,7 @@
 #
 class Color < ApplicationRecord
 	has_one_attached :image
-	has_many :products
+	has_many :products, dependent: :restrict_with_error
 	
 	validates :name, presence: true, uniqueness: true
 end

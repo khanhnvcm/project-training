@@ -8,6 +8,7 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" 
+
     css:
       li.list-group-item:hover {
         background-color: silver;
@@ -16,9 +17,23 @@ html
       .content {
         border-top: 2px solid silver;
       }
+
+      #error_explanation {
+        color: red;
+        ul {
+          list-style: none;
+          margin: 0 0 18px 0;
+        }
+      }
+
+      label.required::after {
+        content: "*";
+        color: red;
+      }
+
     javascript:
       $(document).on('turbolinks:load', function() {
-        $(".alert" ).fadeOut(4000);
+        $('.alert' ).fadeOut(5000);
         var path = window.location.pathname;
         if (path == '/') {$('.list-group-item:contains("Branch")').addClass('active');}
         $('.list-group-item').each(function(){
@@ -44,14 +59,14 @@ html
 
     .row.content
       .col-2
-        .list-group 
+        .list-group style='position: fixed; overflow: auto; width: 15%;'
           =link_to 'Branch', branches_path, class: 'list-group-item btn'
           =link_to 'Manufacturer', manufacturers_path, class: 'list-group-item btn'
           =link_to 'Model', models_path, class: 'list-group-item btn'
           =link_to 'Color', colors_path, class: 'list-group-item btn'
           =link_to 'Memory', memories_path, class: 'list-group-item btn'
           =link_to 'Status', statuses_path, class: 'list-group-item btn'
-          =link_to 'Product', products_path, class: 'list-group-item btn'
           =link_to 'Employee', employees_path, class: 'list-group-item btn'
+          =link_to 'Product', products_path, class: 'list-group-item btn'
       .col-10
           = yield

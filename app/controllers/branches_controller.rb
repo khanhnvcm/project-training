@@ -7,6 +7,12 @@ class BranchesController < ApplicationController
 
   def show
     @branch = Branch.find(params[:id])
+
+    @q = Product.where("branch_id = ?", @branch.id).ransack(search_params)
+    @products = @q.result.includes(:model, :color, :memory, :branch, :status, :import_histories).page(params[:page])
+    @search_path = branch_path(@branch)
+
+    @employees = Employee.where("branch_id = ?", @branch.id)
   end
 
   def new
@@ -36,8 +42,25 @@ class BranchesController < ApplicationController
   end
 
   private
-  def branch_params
-    params.require(:branch).permit(:name, :city, :address, :phone, :email)
-  end
+
+    def branch_params
+      params.require(:branch).permit(:name, :city, :address, :phone, :email)
+    end
+
+    def search_params
+      return unless params[:q]
+      params.require(:q).permit(
+        :model_name_eq,
+        :model_manufacturer_id_eq,
+        :color_name_eq,
+        :memory_amount_eq,
+        :branch_name_eq,
+        :status_name_eq,
+        :price_gteq,
+        :price_lteq,
+        :import_histories_created_at_gteq,
+        :import_histories_created_at_lteq
+      )
+    end
 
 end

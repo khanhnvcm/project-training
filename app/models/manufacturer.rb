@@ -12,7 +12,7 @@
 #  index_manufacturers_on_name  (name) UNIQUE
 #
 class Manufacturer < ApplicationRecord
-	has_many :models
+	has_many :models, dependent: :restrict_with_error
 	
 	validates :name, presence: true, uniqueness: true
 end

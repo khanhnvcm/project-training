@@ -7,6 +7,10 @@ class EmployeesController < ApplicationController
 
   def show
     @employee = Employee.find(params[:id])
+
+    @q = Product.where("employee_id = ?", @employee.id).ransack(search_params)
+    @products = @q.result.includes(:model, :color, :memory, :branch, :status, :import_histories).page(params[:page])
+    @search_path = employee_path(@employee)
   end
 
   def new
@@ -38,11 +42,28 @@ class EmployeesController < ApplicationController
   def destroy
     @employee = Employee.find(params[:id])
     @employee.destroy
-    redirect_to employees_path
+    redirect_to employees_path, alert: "#{@employee.errors.full_messages if @employee.errors.any?}"
   end
 
   private
-  def employee_params
-    params.require(:employee).permit(:name, :position, :birthday, :phone, :email, :address, :branch_id, :image)
-  end
+
+    def employee_params
+      params.require(:employee).permit(:name, :position, :birthday, :phone, :email, :address, :branch_id, :image)
+    end
+
+    def search_params
+      return unless params[:q]
+      params.require(:q).permit(
+        :model_name_eq,
+        :model_manufacturer_id_eq,
+        :color_name_eq,
+        :memory_amount_eq,
+        :branch_name_eq,
+        :status_name_eq,
+        :price_gteq,
+        :price_lteq,
+        :import_histories_created_at_gteq,
+        :import_histories_created_at_lteq
+      )
+    end
 end

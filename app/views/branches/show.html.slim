@@ -1,15 +1,19 @@
 h1.text-center  = @branch.name
-.row
-  .col-1
-  .col-11
-    ul
-      li 
-        |Address: 
-        = @branch.address
-      li 
-        |Phone: 
-        = @branch.phone
-      li 
-        |Email: 
-        = @branch.email 
-h1.text-center  List products of branch
+
+h5 Information:
+ul
+  li 
+    |Address: 
+    = @branch.address
+  li 
+    |Phone: 
+    = @branch.phone
+  li 
+    |Email: 
+    = @branch.email
+
+h3.text-center.mt-4 style='border-top: 2px solid black;' List products of branch
+= render 'products/list_products'
+
+h3.text-center.mt-4 style='border-top: 2px solid black;' List employees of branch
+= render 'employees/list_employees'

@@ -24,6 +24,7 @@ gem 'bootstrap', '~> 5.0.0.alpha3'
 gem 'sass-rails', '>= 6'
 gem 'slim-rails'
 gem 'ransack'
+gem 'select2-rails'
 gem 'kaminari'
 
 #

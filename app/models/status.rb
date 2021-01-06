@@ -12,7 +12,7 @@
 #  index_statuses_on_name  (name) UNIQUE
 #
 class Status < ApplicationRecord
-	has_many :products
+	has_many :products, dependent: :restrict_with_error
 	
 	validates :name, presence: true, uniqueness: true
 end

@@ -20,12 +20,13 @@
 #
 # Indexes
 #
-#  index_products_on_branch_id    (branch_id)
-#  index_products_on_color_id     (color_id)
-#  index_products_on_employee_id  (employee_id)
-#  index_products_on_memory_id    (memory_id)
-#  index_products_on_model_id     (model_id)
-#  index_products_on_status_id    (status_id)
+#  index_products_on_branch_id               (branch_id)
+#  index_products_on_color_id                (color_id)
+#  index_products_on_employee_id             (employee_id)
+#  index_products_on_imei_and_serial_number  (imei,serial_number) UNIQUE
+#  index_products_on_memory_id               (memory_id)
+#  index_products_on_model_id                (model_id)
+#  index_products_on_status_id               (status_id)
 #
 # Foreign Keys
 #

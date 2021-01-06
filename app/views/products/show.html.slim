@@ -1,7 +1,10 @@
-h1.text-center  Show Product (soon)
+h1.text-center  Show Product
+br
+
 .row
   .col-4
-    #ModelCarousel.carousel.slide data-ride="carousel" style="background-color: grey; width: 500px;"
+    h3.text-center = Model.find(@product.model_id).name
+    #ModelCarousel.carousel.slide data-ride="carousel" style="background-color: CornflowerBlue; width: 500px;"
       ol.carousel-indicators
         - @product.images.each_with_index do |image, index|
           li class=("#{index == 0 ? 'active' : ''}") data-slide-to=index data-target="#ModelCarousel" 
@@ -9,10 +12,110 @@ h1.text-center  Show Product (soon)
       .carousel-inner.text-center
         - @product.images.each_with_index do |image, index|
           div class=("carousel-item #{index == 0 ? 'active' : ''}") style="margin-bottom: 50px"
-            = image_tag image, size:"300x500"
+            = image_tag image, size:"300x400"
       a.carousel-control-prev data-slide="prev" href="#ModelCarousel" role="button" 
         span.carousel-control-prev-icon aria-hidden="true" 
         span.sr-only Previous
       a.carousel-control-next data-slide="next" href="#ModelCarousel" role="button" 
         span.carousel-control-next-icon aria-hidden="true" 
         span.sr-only Next
+    h3.text-center.mt-4 = @product.price
+  
+  .col-4
+    h3.text-center Information
+    .row
+      .col-1
+      .col-11
+        ul
+          li 
+            |Memory: 
+            = Memory.find(@product.memory_id).amount
+          li 
+            |Color: 
+            = Color.find(@product.color_id).name
+          li 
+            |Status: 
+            = Status.find(@product.status_id).name
+          li 
+            |Branch: 
+            = Branch.find(@product.branch_id).name
+          li 
+            |Inspector: 
+            = Employee.find(@product.employee_id).name
+          li 
+            |Battery: 
+            = Model.find(@product.model_id).battery
+          li 
+            |Camera: 
+            = Model.find(@product.model_id).camera
+          li 
+            |Display: 
+            = Model.find(@product.model_id).display
+          - if Model.find(@product.model_id).detail.present?
+            li
+              |Detail: 
+              = Model.find(@product.model_id).detail
+          - if @product.description.present?
+            li
+              |Description: 
+              = @product.description
+          br
+          li 
+            |Inspector: 
+            = Employee.find(@product.employee_id).name
+          li 
+            |Imei: 
+            = @product.imei
+          li 
+            |Serial number: 
+            = @product.serial_number
+          br
+          li 
+            |Available: 
+            = @product.available
+          li 
+            |Sold: 
+            = @product.sold
+        = form_with model: @product, local: true do |form|
+          h6.mt-4
+            .row
+              .col-5
+                = form.label :available, 'Set available:'
+              .col-3
+                = select(:product, :available, [true, false], { include_blank: true })
+              .col-4
+                = form.submit 'Submit'
+        = form_with model: @product, local: true do |form|
+          h6.mt-4
+            .row
+              .col-5
+                = form.label :sold, 'Set sold:'
+              .col-3
+                = select(:product, :sold, [true, false], { include_blank: true })
+              .col-4
+                = form.submit 'Submit'
+  
+  .col-4
+    h3.text-center Import date log
+    .row
+    .col-10.offset-1
+      table.table.table-striped
+        thead
+          tr
+            th Date
+            th Branch
+        - @import_histories.each do |import|
+          tr
+            td= import.created_at.strftime('%a, %d %b %Y %H:%M:%S')
+            td= Branch.find(import.branch_id).name
+      = form_with model: @product, local: true do |form|
+        h6.mt-4
+          .row
+            .col-5
+              = form.label :branch_id, 'Move to branch:'
+            .col-3
+              = select(:product, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })
+            .col-4
+              = form.submit 'Submit'
+
+            

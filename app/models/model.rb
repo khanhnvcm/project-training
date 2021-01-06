@@ -24,7 +24,7 @@
 class Model < ApplicationRecord
   has_many_attached :images
   belongs_to :manufacturer
-  has_many :products
+  has_many :products, dependent: :restrict_with_error
   
   validates :name, :battery, :camera, :display, presence: true
 	validates :name, uniqueness: true

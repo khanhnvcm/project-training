@@ -7,6 +7,13 @@ class ModelsController < ApplicationController
 
   def show
     @model = Model.find(params[:id])
+
+    @products = Product.where("model_id = ?", @model.id)
+    @quantity_at_branches = Hash.new
+    @products.pluck(:branch_id).each do |id|
+      @quantity_at_branches[id] = @products.where('branch_id = ?', id).count
+    end
+    
   end
 
   def new
@@ -38,7 +45,7 @@ class ModelsController < ApplicationController
   def destroy
     @model = Model.find(params[:id])
     @model.destroy
-    redirect_to models_path
+    redirect_to models_path, alert: "#{@model.errors.full_messages if @model.errors.any?}"
   end
 
   private

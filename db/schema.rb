@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_011050) do
   end
 
   create_table "memories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "amount", null: false
+    t.string "amount", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["amount"], name: "index_memories_on_amount", unique: true
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_011050) do
     t.index ["branch_id"], name: "index_products_on_branch_id"
     t.index ["color_id"], name: "index_products_on_color_id"
     t.index ["employee_id"], name: "index_products_on_employee_id"
+    t.index ["imei", "serial_number"], name: "index_products_on_imei_and_serial_number", unique: true
     t.index ["memory_id"], name: "index_products_on_memory_id"
     t.index ["model_id"], name: "index_products_on_model_id"
     t.index ["status_id"], name: "index_products_on_status_id"

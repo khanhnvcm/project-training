@@ -1,29 +1,3 @@
 h1.text-center  List of Employees
 =link_to 'Add new employee', new_employee_path, class: 'btn btn-primary mb-4'
-br
-table.table.table-striped
-  thead
-    tr
-      th ID
-      th Name
-      th Position 
-      th Branch
-      th Birthday
-      th Phone
-      th Email
-      th Address
-      th Actions
-  - @employees.each do |employee|
-    tr
-      td= employee.id
-      td= employee.name
-      td= employee.position 
-      td= Branch.find(employee.branch_id).name
-      td= employee.birthday
-      td= employee.phone
-      td= employee.email
-      td= employee.address
-      td
-        = link_to 'Show', employee_path(employee), class: 'btn btn-primary mr-2'
-        = link_to 'Edit', edit_employee_path(employee), class: 'btn btn-primary mr-2'
-        = link_to 'Destroy', employee_path(employee), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-primary'
+= render 'list_employees'

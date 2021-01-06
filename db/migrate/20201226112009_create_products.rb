@@ -16,5 +16,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
 
       t.timestamps null: false
     end
+
+    add_index :products, [:imei, :serial_number], unique: true
   end
 end

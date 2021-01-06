@@ -15,9 +15,9 @@
     .row
       .col-2
       .col-2
-        = form.label :amount, 'Amount (GB)'
+        = form.label :amount, class:'required'
       .col-8
-        = form.number_field :amount, :size => 50
+        = form.text_field :amount, :size => 50
     br
     .row
       .col-4

@@ -10,10 +10,9 @@ table.table.table-striped
       th Actions
   - @models.each do |model|
     tr
-      td= model.id
+      td= link_to "#{model.id}", model_path(model), class: 'btn btn-primary', style: 'width:50px'
       td= model.name
       td= Manufacturer.find(model.manufacturer_id).name
       td
-        = link_to 'Show', model_path(model), class: 'btn btn-primary mr-2'
         = link_to 'Edit', edit_model_path(model), class: 'btn btn-primary mr-2'
-        = link_to 'Destroy', model_path(model), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-primary'
+        = link_to 'Destroy', model_path(model), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'
