@@ -3,7 +3,7 @@
 #
 
 ### Branches
-(1..5).each do |x|
+(1..4).each do |x|
   Branch.create(
     name: "HCM #{x}",
     city: 'Ho Chi Minh',
@@ -53,7 +53,7 @@ end
 end
 
 ### Employees
-['Viet', 'Nam', 'Hoa', 'Binh'].each do |x|
+['Khanh', 'Nam', 'Hieu', 'Binh', 'Viet', 'Hoa', 'Thuan', 'Tien', 'Thang', 'Tuan', 'Hung', 'Vu'].each do |x|
   Employee.create(
     name: "#{x}",
     position: "#{['Manager', 'Staff'].sample}",
@@ -66,7 +66,7 @@ end
 end
 
 ### Products
-(1..50).each do
+(1..100).each do
   imei_value = ''
   serial_value = ''
   (1..18).each {imei_value << ['A', 'B', 'C', 'D'].sample}
