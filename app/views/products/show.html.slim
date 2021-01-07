@@ -79,16 +79,16 @@ br
         = form_with model: @product, local: true do |form|
           h6.mt-4
             = form.label :available, 'Set available:'
-            |'  '
+            |  
             = select(:product, :available, [true, false], {}, {style: 'width: 30%;'})
-            |'  '
+            |  
             = form.submit 'Submit', name: 'update_available'
         = form_with model: @product, local: true do |form|
           h6.mt-4
             = form.label :sold, 'Set sold:'
-            |'  '
+            |  
             = select(:product, :sold, [true, false], {}, {style: 'width: 30%;'})
-            |'  '
+            |  
             = form.submit 'Submit', name: 'update_sold'
   
   .col-4
@@ -107,9 +107,9 @@ br
       = form_with model: @product, local: true do |form|
         h6.mt-4
           = form.label :branch_id, 'Move to branch:'
-          |'  '
+          |  
           = select(:product, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, {}, {style: 'width: 30%;'})
-          |'  '
+          |  
           = form.submit 'Submit', name: 'update_import'
 
             
