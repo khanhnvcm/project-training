@@ -5,14 +5,13 @@ html
     title ProjectTraining
     = csrf_meta_tags
     = csp_meta_tag
-    script src="https://code.jquery.com/jquery-3.5.1.min.js" 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     css:
 
     javascript:
       $(document).on('turbolinks:load', function() {
-        $(".alert" ).fadeOut(4000);
+        $(".alert" ).fadeOut(3000);
       });
       
   body
