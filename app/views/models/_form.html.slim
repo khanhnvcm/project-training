@@ -17,42 +17,42 @@
       .col-2
         = form.label :manufacturer_id, class:'required'
       .col-8
-        = select(:model, :manufacturer_id, Manufacturer.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, {style: 'min-width: 300px;'})
+        = select(:model, :manufacturer_id, Manufacturer.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, {style: 'width: 80%;'})
     br
     .row
       .col-2
       .col-2
         = form.label :name, class:'required'
       .col-8
-        = form.text_field :name, :size => 100
+        = form.text_field :name, size: '80%'
     br
     .row
       .col-2
       .col-2
         = form.label :display, class:'required'
       .col-8
-        = form.text_field :display, :size => 100
+        = form.text_field :display, size: '80%'
     br
     .row
       .col-2
       .col-2
         = form.label :camera, class:'required'
       .col-8
-        = form.text_field :camera, :size => 100    
+        = form.text_field :camera, size: '80%'
     br
     .row
       .col-2
       .col-2
         = form.label :battery, class:'required'
       .col-8
-        = form.text_field :battery, :size => 100
+        = form.text_field :battery, size: '80%'
     br
     .row
       .col-2
       .col-2
         = form.label :detail
       .col-8
-        = form.text_area :detail, :cols => '100'
+        = form.text_area :detail, size: '80%'
     br
     .row
       .col-2
