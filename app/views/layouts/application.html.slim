@@ -17,9 +17,8 @@ html
 
     javascript:
       $(document).on('turbolinks:load', function() {
-        $('select' ).select2();
 
-        $('.alert' ).fadeOut(4000);
+        $('.alert' ).fadeOut(3000);
 
         var path = window.location.pathname;
         if (path == '/') {$('.list-group-item:contains("Branch")').addClass('active');}
@@ -27,6 +26,9 @@ html
           var name = $(this).text().toLowerCase().substring(0,3);
           if (path.includes(name)) {$(this).addClass('active');}
         });
+
+        $('select' ).select2();
+
       });
   
   body
