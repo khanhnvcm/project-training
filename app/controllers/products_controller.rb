@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
+      ImportHistory.create(product_id: @product.id, branch_id: @product.branch_id)
       if params[:create_and_add]
         redirect_to new_product_path, notice: "Created successfully"
       else
@@ -35,17 +36,46 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @product.update(product_params)
-  		redirect_to products_path
+
+    if params[:update_import]
+      if (@product.branch_id.to_s != params[:product][:branch_id])
+        @product.update(product_params)
+        ImportHistory.create(product_id: @product.id, branch_id: @product.branch_id)
+        redirect_to product_path(@product), notice: "Updated successfully"
+      else
+        redirect_to product_path(@product), alert: "Cannot update because the product is already at this branch"
+      end
+
+    elsif params[:update_available]
+      if @product.available.to_s != params[:product][:available]
+        @product.update(product_params)
+        redirect_to product_path(@product), notice: "Updated successfully"
+      else
+        redirect_to product_path(@product), alert: "Cannot update because duplicate value"
+      end
+
+    elsif params[:update_sold]
+      if @product.sold.to_s != params[:product][:sold]
+        @product.update(product_params)
+        redirect_to product_path(@product), notice: "Updated successfully"
+      else
+        redirect_to product_path(@product), alert: "Cannot update because duplicate value"
+      end
+
     else
-  		render 'edit'
+      if @product.update(product_params)
+        redirect_to products_path, notice: "Updated successfully"
+      else
+        render 'edit'
+      end
+
     end
   end
 
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-    redirect_to products_path
+    redirect_to products_path, notice: "Deleted successfully"
   end
 
   private
