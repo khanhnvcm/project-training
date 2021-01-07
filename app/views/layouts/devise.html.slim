@@ -16,10 +16,11 @@ html
       });
       
   body
-    .container-fluid.text-center style='height: 50px'
+    .container-fluid.notice-message.text-center
       -unless notice.nil?
         .alert.alert-success = notice
-    .container-fluid.text-center style='height: 50px'
+    .container-fluid.alert-message.text-center
       -unless alert.nil?
         .alert.alert-danger = alert
-    = yield
+    .devise
+      = yield

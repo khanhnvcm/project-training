@@ -54,12 +54,12 @@ class EmployeesController < ApplicationController
     def search_params
       return unless params[:q]
       params.require(:q).permit(
-        :model_name_eq,
-        :model_manufacturer_id_eq,
-        :color_name_eq,
-        :memory_amount_eq,
-        :branch_name_eq,
-        :status_name_eq,
+        { model_name_in: [] },
+        { model_manufacturer_id_in: [] },
+        { color_name_in: [] },
+        { memory_amount_in: [] },
+        { branch_name_in: [] },
+        { status_name_in: [] },
         :price_gteq,
         :price_lteq,
         :import_histories_created_at_gteq,

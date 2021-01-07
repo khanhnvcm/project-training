@@ -10,7 +10,7 @@ br
       .carousel-inner.text-center
         - @model.images.each_with_index do |image, index|
           div class=("carousel-item #{index == 0 ? 'active' : ''}") style="margin-bottom: 50px"
-            = image_tag image, size:"300x500"
+            = image_tag image, size:"300x400"
       a.carousel-control-prev data-slide="prev" href="#ModelCarousel" role="button" 
         span.carousel-control-prev-icon aria-hidden="true" 
         span.sr-only Previous

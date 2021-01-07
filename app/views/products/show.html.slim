@@ -82,7 +82,7 @@ br
               .col-5
                 = form.label :available, 'Set available:'
               .col-3
-                = select(:product, :available, [true, false], { include_blank: true })
+                = select(:product, :available, [true, false], {}, {style: 'min-width: 100px;'})
               .col-4
                 = form.submit 'Submit'
         = form_with model: @product, local: true do |form|
@@ -91,7 +91,7 @@ br
               .col-5
                 = form.label :sold, 'Set sold:'
               .col-3
-                = select(:product, :sold, [true, false], { include_blank: true })
+                = select(:product, :sold, [true, false], {}, {style: 'min-width: 100px;'})
               .col-4
                 = form.submit 'Submit'
   
@@ -114,7 +114,7 @@ br
             .col-5
               = form.label :branch_id, 'Move to branch:'
             .col-3
-              = select(:product, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })
+              = select(:product, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, {}, {style: 'min-width: 100px;'})
             .col-4
               = form.submit 'Submit'
 

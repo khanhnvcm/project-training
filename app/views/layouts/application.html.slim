@@ -1,39 +1,26 @@
 doctype html
 html
   head
+  body
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     title ProjectTraining
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    
+    /Carousel
     script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" 
-
-    css:
-      li.list-group-item:hover {
-        background-color: silver;
-      }
-
-      .content {
-        border-top: 2px solid silver;
-      }
-
-      #error_explanation {
-        color: red;
-        ul {
-          list-style: none;
-          margin: 0 0 18px 0;
-        }
-      }
-
-      label.required::after {
-        content: "*";
-        color: red;
-      }
+    /Select2
+    link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet"
+    script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"
 
     javascript:
       $(document).on('turbolinks:load', function() {
-        $('.alert' ).fadeOut(5000);
+        $('select' ).select2();
+
+        $('.alert' ).fadeOut(4000);
+
         var path = window.location.pathname;
         if (path == '/') {$('.list-group-item:contains("Branch")').addClass('active');}
         $('.list-group-item').each(function(){
@@ -41,25 +28,24 @@ html
           if (path.includes(name)) {$(this).addClass('active');}
         });
       });
-
+  
   body
-    .row
+    .container-fluid.notice-message.text-center
+      -unless notice.nil?
+        .alert.alert-success = notice
+    .container-fluid.alert-message.text-center
+      -unless alert.nil?
+        .alert.alert-danger = alert
+    
+    .row.header
       .col-11.text-right
         - if user_signed_in?
           span.account= current_user.email
           br
           = link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-dark'
-
-    .container-fluid.text-center style='height: 50px'
-      -unless notice.nil?
-        .alert.alert-success = notice
-    .container-fluid.text-center style='height: 50px'
-      -unless alert.nil?
-        .alert.alert-danger = alert
-
-    .row.content
+    .row
       .col-2
-        .list-group style='position: fixed; overflow: auto; width: 15%;'
+        .list-group.side-bar
           =link_to 'Branch', branches_path, class: 'list-group-item btn'
           =link_to 'Manufacturer', manufacturers_path, class: 'list-group-item btn'
           =link_to 'Model', models_path, class: 'list-group-item btn'
@@ -69,4 +55,4 @@ html
           =link_to 'Employee', employees_path, class: 'list-group-item btn'
           =link_to 'Product', products_path, class: 'list-group-item btn'
       .col-10
-          = yield
+        = yield

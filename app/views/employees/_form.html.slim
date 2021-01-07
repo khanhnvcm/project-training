@@ -17,49 +17,49 @@
       .col-2
         = form.label :name, class:'required'
       .col-8
-        = form.text_field :name, :size => 50
+        = form.text_field :name, :size => 100
     br
     .row
       .col-2
       .col-2
         = form.label :position, class:'required'
       .col-8
-        = form.text_field :position, :size => 50
+        = form.text_field :position, :size => 100
     br
     .row
       .col-2
       .col-2
         = form.label :branch_id, class:'required'
       .col-8
-        = select(:employee, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, { include_blank: true })    
+        = select(:employee, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, {style: 'min-width: 300px;'})    
     br
     .row
       .col-2
       .col-2
         = form.label :birthday, class:'required'
       .col-8
-        = form.date_field :birthday, :size => 50
+        = form.date_field :birthday, :size => 100
     br
     .row
       .col-2
       .col-2
         = form.label :phone, class:'required'
       .col-8
-        = form.text_field :phone, :size => 50
+        = form.text_field :phone, :size => 100
     br
     .row
       .col-2
       .col-2
         = form.label :email, class:'required'
       .col-8
-        = form.text_field :email, :size => 50
+        = form.text_field :email, :size => 100
     br
     .row
       .col-2
       .col-2
         = form.label :address, class:'required'
       .col-8
-        = form.text_field :address, :size => 50
+        = form.text_field :address, :size => 100
     br
     .row
       .col-2

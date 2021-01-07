@@ -2,23 +2,29 @@
   = search_form_for @q, url: @search_path do |f|
     .row
       .col-2
-        = f.label :model_name_eq, 'Model'
-        = f.select(:model_name_eq, Model.all.collect {|p| [ p.name] }, { include_blank: true }, class: 'form-control')
+        = f.label :model_name_in, 'Model'
+        br
+        = f.select(:model_name_in, Model.all.collect {|p| [ p.name] }, {}, class: 'form-control', multiple: true)
       .col-2
-        = f.label :model_manufacturer_id_eq, 'Manufacturer'
-        = f.select(:model_manufacturer_id_eq, Manufacturer.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, class: 'form-control')
+        = f.label :model_manufacturer_id_in, 'Manufacturer'
+        br
+        = f.select(:model_manufacturer_id_in, Manufacturer.all.collect {|p| [ p.name, p.id ] }, {}, class: 'form-control', multiple: true)
       .col-2
-          = f.label :color_name_eq, 'Color'
-          = f.select(:color_name_eq, Color.all.collect {|p| [ p.name] }, { include_blank: true }, class: 'form-control')
+          = f.label :color_name_in, 'Color'
+          br
+          = f.select(:color_name_in, Color.all.collect {|p| [ p.name] }, {}, class: 'form-control', multiple: true)
       .col-2
-          = f.label :memory_amount_eq, 'Memory'
-          = f.select(:memory_amount_eq, Memory.all.collect {|p| [ p.amount] }, { include_blank: true }, class: 'form-control')
+          = f.label :memory_amount_in, 'Memory'
+          br
+          = f.select(:memory_amount_in, Memory.all.collect {|p| [ p.amount] }, {}, class: 'form-control', multiple: true)
       .col-2
-          = f.label :branch_name_eq, 'Branch'
-          = f.select(:branch_name_eq, Branch.all.collect {|p| [ p.name] }, { include_blank: true }, class: 'form-control')
+          = f.label :branch_name_in, 'Branch'
+          br
+          = f.select(:branch_name_in, Branch.all.collect {|p| [ p.name] }, {}, class: 'form-control', multiple: true)
       .col-2
-          = f.label :status_name_eq, 'Status'
-          = f.select(:status_name_eq, Status.all.collect {|p| [ p.name] }, { include_blank: true }, class: 'form-control')
+          = f.label :status_name_in, 'Status'
+          br
+          = f.select(:status_name_in, Status.all.collect {|p| [ p.name] }, {}, class: 'form-control', multiple: true)
     .row.mt-4
       .col-6
         = f.label :price, 'Price'
