@@ -1,14 +1,13 @@
 class BranchesController < ApplicationController
   before_action :authenticate_user!
-  
+  before_action :set_branch, only: %i[show edit update]
+
   def index
     @branches = Branch.all
   end
 
   def show
-    @branch = Branch.find(params[:id])
-
-    @q = Product.where("branch_id = ?", @branch.id).ransack(search_params)
+    @q = @branch.products.ransack(search_params)
     @products = @q.result.includes(:model, :color, :memory, :branch, :status, :import_histories).page(params[:page])
     @search_path = branch_path(@branch)
 
@@ -29,11 +28,9 @@ class BranchesController < ApplicationController
   end
   
   def edit
-    @branch = Branch.find(params[:id])
   end
 
   def update
-    @branch = Branch.find(params[:id])
     if @branch.update(branch_params)
   		redirect_to branches_path
     else
@@ -42,6 +39,9 @@ class BranchesController < ApplicationController
   end
 
   private
+    def set_branch
+      @branch = Branch.find(params[:id])
+    end
 
     def branch_params
       params.require(:branch).permit(:name, :city, :address, :phone, :email)

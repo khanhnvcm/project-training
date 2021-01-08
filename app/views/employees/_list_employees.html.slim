@@ -15,7 +15,7 @@ table.table.table-striped.mt-4
       td= link_to "#{employee.id}", employee_path(employee), class: 'btn btn-primary', style: 'width:50px'
       td= employee.name
       td= employee.position 
-      td= Branch.find(employee.branch_id).name
+      td= employee.branch.name
       td= employee.birthday
       td= employee.phone
       td= employee.email

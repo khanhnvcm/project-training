@@ -1,14 +1,13 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_employee, only: %i[show edit update destroy]
   
   def index
     @employees = Employee.all
   end
 
   def show
-    @employee = Employee.find(params[:id])
-
-    @q = Product.where("employee_id = ?", @employee.id).ransack(search_params)
+    @q = @employee.products.ransack(search_params)
     @products = @q.result.includes(:model, :color, :memory, :branch, :status, :import_histories).page(params[:page])
     @search_path = employee_path(@employee)
   end
@@ -27,11 +26,9 @@ class EmployeesController < ApplicationController
   end
   
   def edit
-    @employee = Employee.find(params[:id])
   end
 
   def update
-    @employee = Employee.find(params[:id])
     if @employee.update(employee_params)
   		redirect_to employees_path
     else
@@ -40,12 +37,14 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    @employee = Employee.find(params[:id])
     @employee.destroy
-    redirect_to employees_path, alert: "#{@employee.errors.full_messages if @employee.errors.any?}"
+    redirect_to employees_path, alert: "#{@employee.errors.full_messages.join(', ') if @employee.errors.any?}"
   end
 
   private
+    def set_employee
+      @employee = Employee.find(params[:id])
+    end
 
     def employee_params
       params.require(:employee).permit(:name, :position, :birthday, :phone, :email, :address, :branch_id, :image)

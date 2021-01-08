@@ -1,19 +1,13 @@
 class ModelsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_model, only: %i[show edit update destroy]
   
   def index
     @models = Model.all
   end
 
   def show
-    @model = Model.find(params[:id])
-
-    @products = Product.where("model_id = ?", @model.id)
-    @quantity_at_branches = Hash.new
-    @products.pluck(:branch_id).each do |id|
-      @quantity_at_branches[id] = @products.where('branch_id = ?', id).count
-    end
-    
+    @branch_with_models = Branch.distinct.joins(:products).where('products.model_id = ?', @model.id).order(:name)
   end
 
   def new
@@ -30,11 +24,9 @@ class ModelsController < ApplicationController
   end
   
   def edit
-    @model = Model.find(params[:id])
   end
 
   def update
-    @model = Model.find(params[:id])
     if @model.update(model_params)
   		redirect_to models_path
     else
@@ -43,12 +35,15 @@ class ModelsController < ApplicationController
   end
 
   def destroy
-    @model = Model.find(params[:id])
     @model.destroy
-    redirect_to models_path, alert: "#{@model.errors.full_messages if @model.errors.any?}"
+    redirect_to models_path, alert: "#{@model.errors.full_messages.join(', ') if @model.errors.any?}"
   end
 
   private
+  def set_model
+    @model = Model.find(params[:id])
+  end
+
   def model_params
     params.require(:model).permit(:name, :battery, :camera, :display, :manufacturer_id, :detail, images: [])
   end

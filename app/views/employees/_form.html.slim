@@ -31,7 +31,7 @@
       .col-2
         = form.label :branch_id, class:'required'
       .col-8
-        = select(:employee, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, {style: 'width: 80%;'})
+        = select(:employee, :branch_id, Branch.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, class: 'select2', style: 'width: 80%;')
     br
     .row
       .col-2

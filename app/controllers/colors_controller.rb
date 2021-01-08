@@ -1,5 +1,6 @@
 class ColorsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_color, only: %i[edit update]
   
   def index
     @colors = Color.all
@@ -19,11 +20,9 @@ class ColorsController < ApplicationController
   end
   
   def edit
-    @color = Color.find(params[:id])
   end
 
   def update
-    @color = Color.find(params[:id])
     if @color.update(color_params)
   		redirect_to colors_path
     else
@@ -32,6 +31,10 @@ class ColorsController < ApplicationController
   end
 
   private
+  def set_color
+    @color = Color.find(params[:id])
+  end
+
   def color_params
     params.require(:color).permit(:name, :image)
   end

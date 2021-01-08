@@ -22,9 +22,10 @@
 #  fk_rails_...  (manufacturer_id => manufacturers.id)
 #
 class Model < ApplicationRecord
-  has_many_attached :images
   belongs_to :manufacturer
   has_many :products, dependent: :restrict_with_error
+
+  has_many_attached :images
   
   validates :name, :battery, :camera, :display, presence: true
 	validates :name, uniqueness: true

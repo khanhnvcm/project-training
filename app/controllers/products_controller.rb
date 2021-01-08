@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_product, only: %i[show edit update update_import update_available update_sold destroy]
   
   def index
     @q = Product.ransack(search_params)
@@ -8,8 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
-    @import_histories = ImportHistory.where("product_id = ?", @product.id)
+    @import_histories = @product.import_histories
   end
 
   def new
@@ -31,54 +31,30 @@ class ProductsController < ApplicationController
   end
   
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
+    @product.assign_attributes(product_params)
 
-    if params[:update_import]
-      if (@product.branch_id.to_s != params[:product][:branch_id])
-        @product.update(product_params)
-        ImportHistory.create(product_id: @product.id, branch_id: @product.branch_id)
-        redirect_to product_path(@product), notice: "Updated successfully"
-      else
-        redirect_to product_path(@product), alert: "Cannot update because the product is already at this branch"
-      end
-
-    elsif params[:update_available]
-      if @product.available.to_s != params[:product][:available]
-        @product.update(product_params)
-        redirect_to product_path(@product), notice: "Updated successfully"
-      else
-        redirect_to product_path(@product), alert: "Cannot update because duplicate value"
-      end
-
-    elsif params[:update_sold]
-      if @product.sold.to_s != params[:product][:sold]
-        @product.update(product_params)
-        redirect_to product_path(@product), notice: "Updated successfully"
-      else
-        redirect_to product_path(@product), alert: "Cannot update because duplicate value"
-      end
-
+    ImportHistory.create(product_id: @product.id, branch_id: @product.branch_id) if @product.branch_id_changed? && @product.valid?
+    
+    if @product.save
+      redirect_to product_path(@product), notice: "Updated successfully"
     else
-      if @product.update(product_params)
-        redirect_to products_path, notice: "Updated successfully"
-      else
-        render 'edit'
-      end
-
+      render 'edit'
     end
   end
-
+  
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path, notice: "Deleted successfully"
   end
 
   private
+    def set_product
+      @product = Product.find(params[:id])
+    end
+
     def product_params
       params.require(:product).permit(
         :model_id,

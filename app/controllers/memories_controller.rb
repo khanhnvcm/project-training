@@ -1,5 +1,6 @@
 class MemoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_memory, only: %i[edit update]
   
   def index
     @memories = Memory.all
@@ -19,11 +20,9 @@ class MemoriesController < ApplicationController
   end
   
   def edit
-    @memory = Memory.find(params[:id])
   end
 
   def update
-    @memory = Memory.find(params[:id])
     if @memory.update(memory_params)
   		redirect_to memories_path
     else
@@ -32,6 +31,10 @@ class MemoriesController < ApplicationController
   end
 
   private
+  def set_memory
+    @memory = Memory.find(params[:id])
+  end
+
   def memory_params
     params.require(:memory).permit(:amount)
   end

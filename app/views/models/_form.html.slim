@@ -17,7 +17,7 @@
       .col-2
         = form.label :manufacturer_id, class:'required'
       .col-8
-        = select(:model, :manufacturer_id, Manufacturer.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, {style: 'width: 80%;'})
+        = select(:model, :manufacturer_id, Manufacturer.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, class: 'select2', style: 'width: 80%;')
     br
     .row
       .col-2

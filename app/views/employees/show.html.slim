@@ -16,7 +16,7 @@ h1.text-center  Information
         = @employee.position
       li 
         |Branch: 
-        = Branch.find(@employee.branch_id).name 
+        = @employee.branch.name 
       li 
         |Phone: 
         = @employee.phone

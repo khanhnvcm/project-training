@@ -4,42 +4,42 @@
       .col-2
         = f.label :model_name_in, 'Model'
         br
-        = f.select(:model_name_in, Model.all.collect {|p| [ p.name] }, {}, class: 'form-control', multiple: true)
+        = f.select(:model_name_in, Model.all.collect {|p| [ p.name] }, {}, class: 'form-control select2', multiple: true)
       .col-2
         = f.label :model_manufacturer_id_in, 'Manufacturer'
         br
-        = f.select(:model_manufacturer_id_in, Manufacturer.all.collect {|p| [ p.name, p.id ] }, {}, class: 'form-control', multiple: true)
+        = f.select(:model_manufacturer_id_in, Manufacturer.all.collect {|p| [ p.name, p.id ] }, {}, class: 'form-control select2', multiple: true)
       .col-2
           = f.label :color_name_in, 'Color'
           br
-          = f.select(:color_name_in, Color.all.collect {|p| [ p.name] }, {}, class: 'form-control', multiple: true)
+          = f.select(:color_name_in, Color.all.collect {|p| [ p.name] }, {}, class: 'form-control select2', multiple: true)
       .col-2
           = f.label :memory_amount_in, 'Memory'
           br
-          = f.select(:memory_amount_in, Memory.all.collect {|p| [ p.amount] }, {}, class: 'form-control', multiple: true)
+          = f.select(:memory_amount_in, Memory.all.collect {|p| [ p.amount] }, {}, class: 'form-control select2', multiple: true)
       .col-2
           = f.label :branch_name_in, 'Branch'
           br
-          = f.select(:branch_name_in, Branch.all.collect {|p| [ p.name] }, {}, class: 'form-control', multiple: true)
+          = f.select(:branch_name_in, Branch.all.collect {|p| [ p.name] }, {}, class: 'form-control select2', multiple: true)
       .col-2
           = f.label :status_name_in, 'Status'
           br
-          = f.select(:status_name_in, Status.all.collect {|p| [ p.name] }, {}, class: 'form-control', multiple: true)
+          = f.select(:status_name_in, Status.all.collect {|p| [ p.name] }, {}, class: 'form-control select2', multiple: true)
     .row.mt-4
       .col-6
-        = f.label :price, 'Price'
+        = f.label :price, 'Price ($)'
         .row
           .col-6
-            = f.search_field :price_gteq, class: "form-control", placeholder: 'Price from'
+            = f.search_field(:price_gteq, class: "form-control", placeholder: 'Price from')
           .col-6
-            = f.search_field :price_lteq, class: "form-control", placeholder: 'Price to'
+            = f.search_field(:price_lteq, class: "form-control", placeholder: 'Price to')
       .col-6
         = f.label :import_histories, 'Import Date'
         .row
           .col-6
-            = f.search_field :import_histories_created_at_gteq, class: "form-control", placeholder: 'Date from', onfocus: "(this.type='date')"
+            = f.search_field(:import_histories_created_at_gteq, class: "form-control", placeholder: 'Date from', onfocus: "(this.type='date')")
           .col-6
-            = f.search_field :import_histories_created_at_lteq, class: "form-control", placeholder: 'Date to', onfocus: "(this.type='date')"
+            = f.search_field(:import_histories_created_at_lteq, class: "form-control", placeholder: 'Date to', onfocus: "(this.type='date')")
     .text-center
       = f.submit "Search", class: "btn btn-primary mt-4"
 
@@ -59,13 +59,13 @@ table.table.table-striped.mt-4
   - @products.each do |product|
     tr
       td= link_to "#{product.id}", product_path(product), class: 'btn btn-primary mr-2', style: 'width: 50px'
-      td= Model.find(product.model_id).name
-      td= Manufacturer.find(Model.find(product.model_id).manufacturer_id).name 
-      td= Color.find(product.color_id).name
-      td= Memory.find(product.memory_id).amount
-      td= Branch.find(product.branch_id).name
-      td= Status.find(product.status_id).name
-      td= product.price
+      td= product.model.name
+      td= product.model.manufacturer.name 
+      td= product.color.name
+      td= product.memory.amount
+      td= product.branch.name
+      td= product.status.name
+      td= number_to_currency(product.price, precision: 0, unit: '$')
       td= product.import_histories.last.updated_at.strftime('%a, %d %b %Y %H:%M:%S')
       td
         = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary mr-2'
