@@ -11,7 +11,7 @@ class BranchesController < ApplicationController
     @products = @q.result.includes(:model, :color, :memory, :branch, :status, :import_histories).page(params[:page])
     @search_path = branch_path(@branch)
 
-    @employees = Employee.where("branch_id = ?", @branch.id)
+    @employees = Employee.where(branch_id: @branch.id)
   end
 
   def new

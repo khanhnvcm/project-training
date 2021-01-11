@@ -7,7 +7,7 @@ class ModelsController < ApplicationController
   end
 
   def show
-    @branch_with_models = Branch.distinct.joins(:products).where('products.model_id = ?', @model.id).order(:name)
+    @branch_with_models = Branch.distinct.joins(:products).where('model_id = ?', @model.id).order(:name)
   end
 
   def new

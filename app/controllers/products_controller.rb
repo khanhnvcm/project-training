@@ -18,16 +18,16 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    if @product.save
-      ImportHistory.create(product_id: @product.id, branch_id: @product.branch_id)
-      if params[:create_and_add]
-        redirect_to new_product_path, notice: "Created successfully"
-      else
-        redirect_to products_path
-      end
+    unless @product.save
+      render 'new' && return
+    end
+
+    ImportHistory.create(product_id: @product.id, branch_id: @product.branch_id)
+    if params[:create_and_add]
+      redirect_to new_product_path, notice: "Created successfully"
     else
-  		render 'new'
-  	end
+      redirect_to products_path
+    end
   end
   
   def edit
@@ -35,10 +35,9 @@ class ProductsController < ApplicationController
 
   def update
     @product.assign_attributes(product_params)
-
-    ImportHistory.create(product_id: @product.id, branch_id: @product.branch_id) if @product.branch_id_changed? && @product.valid?
-    
     if @product.save
+      ImportHistory.create(product_id: @product.id, branch_id: @product.branch_id) if @product.branch_id_previously_changed?
+
       redirect_to product_path(@product), notice: "Updated successfully"
     else
       render 'edit'
