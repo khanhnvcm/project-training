@@ -47,9 +47,9 @@ jobs:
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
-#       - run:
-#           name: Setup DB
-#           command: bundle exec rails db:create db:schema:load --trace
+      - run:
+          name: Setup DB
+          command: bundle exec rails db:create db:schema:load --trace
       - save_cache:
           key: project_training-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
