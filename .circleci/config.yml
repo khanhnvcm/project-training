@@ -75,5 +75,5 @@ workflows:
     jobs:
       - build
       - rubocop:
-        requires:
-          - build
+          requires:
+            - build
