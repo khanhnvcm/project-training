@@ -1,0 +1,16 @@
+AllCops:
+ Exclude:
+   - 'db/**/*'
+   - 'config/**/*'
+   - 'script/**/*'
+   - 'bin/{rails,rake,bundle}'
+   - 'node_modules/**/*'
+   - 'lib/tasks/auto_annotate_models.rake'
+
+Style/Documentation:
+  Description: "Document classes and non-namespace modules."
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false

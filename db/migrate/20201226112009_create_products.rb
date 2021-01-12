@@ -11,12 +11,12 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.string :imei, null: false
       t.string :serial_number, null: false
       t.references :employee, null: false, foreign_key: true
-      t.boolean :available, :default => true
-      t.boolean :sold, :default => false
+      t.boolean :available, default: true
+      t.boolean :sold, default: false
 
       t.timestamps null: false
     end
 
-    add_index :products, [:imei, :serial_number], unique: true
+    add_index :products, %i[imei serial_number], unique: true
   end
 end

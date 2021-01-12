@@ -11,7 +11,7 @@ class CreateEmployees < ActiveRecord::Migration[6.0]
 
       t.timestamps null: false
     end
-    
+
     add_index :employees, :email, unique: true
   end
 end

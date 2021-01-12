@@ -14,8 +14,8 @@
 end
 
 ### Manufacturers
-['Apple', 'Samsung', 'Oppo', 'Sony'].each do |x|
-  Manufacturer.create(name: "#{x}")
+%w[Apple Samsung Oppo Sony].each do |x|
+  Manufacturer.create(name: x.to_s)
 end
 
 ### Models
@@ -30,7 +30,7 @@ model_name.each_with_index do |manu, index|
     Model.create(
       manufacturer_id: (index + 1),
       name: model,
-      display: "#{['4.5 inches', '5 inches', '5.5 inches'].sample}",
+      display: ['4.5 inches', '5 inches', '5.5 inches'].sample.to_s,
       camera: "#{rand(10..20)} MP",
       battery: "#{rand(20..30) * 100} mAh"
     )
@@ -39,26 +39,26 @@ end
 
 ### Colors
 ['Black', 'Purple', 'Red', 'Grey', 'Blue', 'Yellow', 'Orange', 'Green', 'Dark Blue'].each do |x|
-  Color.create(name: "#{x}")
+  Color.create(name: x.to_s)
 end
 
 ### Memories
-['8GB', '16GB', '32GB', '64GB', '128GB', '256GB'].each do |x|
-  Memory.create(amount: "#{x}")
+%w[8GB 16GB 32GB 64GB 128GB 256GB].each do |x|
+  Memory.create(amount: x.to_s)
 end
 
 ### Statuses
 ['< 95%', '95% - 98%', '99%', 'like new'].each do |x|
-  Status.create(name: "#{x}")
+  Status.create(name: x.to_s)
 end
 
 ### Employees
-['Khanh', 'Nam', 'Hieu', 'Binh', 'Viet', 'Hoa', 'Thuan', 'Tien', 'Thang', 'Tuan', 'Hung', 'Vu'].each do |x|
+%w[Khanh Nam Hieu Binh Viet Hoa Thuan Tien Thang Tuan Hung Vu].each do |x|
   Employee.create(
-    name: "#{x}",
-    position: "#{['Manager', 'Staff'].sample}",
+    name: x.to_s,
+    position: %w[Manager Staff].sample.to_s,
     branch_id: Branch.pluck(:id).sample,
-    birthday: Time.now.to_date - rand(7500..13000).day,
+    birthday: Time.now.to_date - rand(7500..13_000).day,
     phone: "09-#{rand(1000..9999)}-#{rand(1000..9999)}",
     email: "#{x.downcase}@gmail.com",
     address: "District #{rand(1..10)}"
@@ -66,11 +66,11 @@ end
 end
 
 ### Products
-(1..100).each do
+100.times do
   imei_value = ''
   serial_value = ''
-  (1..18).each {imei_value << ['A', 'B', 'C', 'D'].sample}
-  (1..9).each {serial_value << rand(1..9).to_s}
+  18.times { imei_value << %w[A B C D].sample }
+  9.times { serial_value << rand(1..9).to_s }
   Product.create(
     model_id: Model.pluck(:id).sample,
     memory_id: Memory.pluck(:id).sample,

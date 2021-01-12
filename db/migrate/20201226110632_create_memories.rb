@@ -5,7 +5,7 @@ class CreateMemories < ActiveRecord::Migration[6.0]
 
       t.timestamps null: false
     end
-    
+
     add_index :memories, :amount, unique: true
   end
 end

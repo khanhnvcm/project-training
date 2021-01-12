@@ -1,7 +1,7 @@
 class ManufacturersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_manufacturer, only: %i[edit update]
-  
+
   def index
     @manufacturers = Manufacturer.all
   end
@@ -13,24 +13,24 @@ class ManufacturersController < ApplicationController
   def create
     @manufacturer = Manufacturer.new(manufacturer_params)
     if @manufacturer.save
-  		redirect_to manufacturers_path
+      redirect_to manufacturers_path
     else
-  		render 'new'
-  	end
+      render 'new'
+    end
   end
-  
-  def edit
-  end
+
+  def edit; end
 
   def update
     if @manufacturer.update(manufacturer_params)
-  		redirect_to manufacturers_path
+      redirect_to manufacturers_path
     else
-  		render 'edit'
-  	end
+      render 'edit'
+    end
   end
 
   private
+
   def set_manufacturer
     @manufacturer = Manufacturer.find(params[:id])
   end
@@ -38,5 +38,4 @@ class ManufacturersController < ApplicationController
   def manufacturer_params
     params.require(:manufacturer).permit(:name)
   end
-
 end

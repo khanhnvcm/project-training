@@ -12,7 +12,7 @@
 #  index_memories_on_amount  (amount) UNIQUE
 #
 class Memory < ApplicationRecord
-	has_many :products, dependent: :restrict_with_error
-	
-	validates :amount, presence: true, uniqueness: true
+  has_many :products, dependent: :restrict_with_error
+
+  validates :amount, presence: true, uniqueness: true
 end

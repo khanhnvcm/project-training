@@ -47,7 +47,7 @@ class Product < ApplicationRecord
   has_many :import_histories, dependent: :destroy
 
   has_many_attached :images
-  
+
   validates :imei, :price, :serial_number, presence: true
   validates :imei, uniqueness: true
   validates :price, numericality: { greater_than: 0 }

@@ -26,7 +26,7 @@ class Employee < ApplicationRecord
   has_one_attached :image
   belongs_to :branch
   has_many :products, dependent: :restrict_with_error
-  
+
   validates :name, :position, :birthday, :phone, :email, :address, presence: true
-	validates :email, uniqueness: true
+  validates :email, uniqueness: true
 end

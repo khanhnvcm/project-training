@@ -21,46 +21,46 @@ class BranchesController < ApplicationController
   def create
     @branch = Branch.new(branch_params)
     if @branch.save
-  		redirect_to branches_path
+      redirect_to branches_path
     else
-  		render 'new'
-  	end
+      render 'new'
+    end
   end
-  
-  def edit
-  end
+
+  def edit; end
 
   def update
     if @branch.update(branch_params)
-  		redirect_to branches_path
+      redirect_to branches_path
     else
-  		render 'edit'
-  	end
+      render 'edit'
+    end
   end
 
   private
-    def set_branch
-      @branch = Branch.find(params[:id])
-    end
 
-    def branch_params
-      params.require(:branch).permit(:name, :city, :address, :phone, :email)
-    end
+  def set_branch
+    @branch = Branch.find(params[:id])
+  end
 
-    def search_params
-      return unless params[:q]
-      params.require(:q).permit(
-        { model_name_in: [] },
-        { model_manufacturer_id_in: [] },
-        { color_name_in: [] },
-        { memory_amount_in: [] },
-        { branch_name_in: [] },
-        { status_name_in: [] },
-        :price_gteq,
-        :price_lteq,
-        :import_histories_created_at_gteq,
-        :import_histories_created_at_lteq
-      )
-    end
+  def branch_params
+    params.require(:branch).permit(:name, :city, :address, :phone, :email)
+  end
 
+  def search_params
+    return unless params[:q]
+
+    params.require(:q).permit(
+      { model_name_in: [] },
+      { model_manufacturer_id_in: [] },
+      { color_name_in: [] },
+      { memory_amount_in: [] },
+      { branch_name_in: [] },
+      { status_name_in: [] },
+      :price_gteq,
+      :price_lteq,
+      :import_histories_created_at_gteq,
+      :import_histories_created_at_lteq
+    )
+  end
 end

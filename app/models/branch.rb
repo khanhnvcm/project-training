@@ -16,10 +16,10 @@
 #  index_branches_on_name_and_email  (name,email) UNIQUE
 #
 class Branch < ApplicationRecord
-	has_many :products, dependent: :restrict_with_error
-	has_many :employees, dependent: :restrict_with_error
-	has_many :import_histories, dependent: :restrict_with_error
-	
-	validates :name, :city, :address, :phone, :email, presence: true
-	validates :name, :email, uniqueness: true
+  has_many :products, dependent: :restrict_with_error
+  has_many :employees, dependent: :restrict_with_error
+  has_many :import_histories, dependent: :restrict_with_error
+
+  validates :name, :city, :address, :phone, :email, presence: true
+  validates :name, :email, uniqueness: true
 end

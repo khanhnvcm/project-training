@@ -9,7 +9,7 @@ class CreateBranches < ActiveRecord::Migration[6.0]
 
       t.timestamps null: false
     end
-    
-    add_index :branches, [:name, :email], unique: true
+
+    add_index :branches, %i[name email], unique: true
   end
 end
