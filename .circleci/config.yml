@@ -9,7 +9,7 @@ executors:
           BUNDLE_JOBS: 3
           BUNDLE_PATH: vendor/bundle
           BUNDLE_RETRY: 3
-          BUNDLER_VERSION: 2.0.1
+          BUNDLER_VERSION: 2.1.4
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
           DB_USERNAME: root
@@ -50,6 +50,16 @@ jobs:
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:schema:load --trace
+      - run:
+          name: Factory Lint
+          command: bin/rake factory_bot:lint
+      - run:
+          name: RSpec
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format progress
+      - store_artifacts:
+          path: coverage
       - save_cache:
           key: project_training-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:

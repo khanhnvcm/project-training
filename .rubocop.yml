@@ -1,5 +1,7 @@
 AllCops:
- Exclude:
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
    - 'db/**/*'
    - 'config/**/*'
    - 'script/**/*'
@@ -12,5 +14,7 @@ Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
-Metrics/MethodLength:
+Style/CommentedKeyword:
+  Enabled: false
+Metrics/BlockLength:
   Enabled: false

@@ -50,7 +50,7 @@ class EmployeesController < ApplicationController
     params.require(:employee).permit(:name, :position, :birthday, :phone, :email, :address, :branch_id, :image)
   end
 
-  def search_params
+  def search_params # rubocop:disable Metrics/MethodLength
     return unless params[:q]
 
     params.require(:q).permit(

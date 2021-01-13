@@ -49,6 +49,6 @@ class Product < ApplicationRecord
   has_many_attached :images
 
   validates :imei, :price, :serial_number, presence: true
-  validates :imei, uniqueness: true
+  validates :imei, uniqueness: { case_sensitive: true }
   validates :price, numericality: { greater_than: 0 }
 end

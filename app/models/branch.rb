@@ -21,5 +21,5 @@ class Branch < ApplicationRecord
   has_many :import_histories, dependent: :restrict_with_error
 
   validates :name, :city, :address, :phone, :email, presence: true
-  validates :name, :email, uniqueness: true
+  validates :name, :email, uniqueness: { case_sensitive: true }
 end

@@ -47,7 +47,7 @@ class BranchesController < ApplicationController
     params.require(:branch).permit(:name, :city, :address, :phone, :email)
   end
 
-  def search_params
+  def search_params # rubocop:disable Metrics/MethodLength
     return unless params[:q]
 
     params.require(:q).permit(

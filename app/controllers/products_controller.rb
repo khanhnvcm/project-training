@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def product_params
+  def product_params # rubocop:disable Metrics/MethodLength
     params.require(:product).permit(
       :model_id,
       :memory_id,
@@ -73,7 +73,7 @@ class ProductsController < ApplicationController
     )
   end
 
-  def search_params
+  def search_params # rubocop:disable Metrics/MethodLength
     return unless params[:q]
 
     params.require(:q).permit(

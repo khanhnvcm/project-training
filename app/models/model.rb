@@ -28,5 +28,5 @@ class Model < ApplicationRecord
   has_many_attached :images
 
   validates :name, :battery, :camera, :display, presence: true
-  validates :name, uniqueness: true
+  validates :name, uniqueness: { case_sensitive: true }
 end

@@ -14,5 +14,5 @@
 class Memory < ApplicationRecord
   has_many :products, dependent: :restrict_with_error
 
-  validates :amount, presence: true, uniqueness: true
+  validates :amount, presence: true, uniqueness: { case_sensitive: true }
 end
