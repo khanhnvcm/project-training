@@ -50,9 +50,9 @@ jobs:
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:schema:load --trace
-      - run:
-          name: Factory Lint
-          command: bin/rake factory_bot:lint
+      # - run:
+      #     name: Factory Lint
+      #     command: bin/rake factory_bot:lint
       - run:
           name: RSpec
           command: |
