@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :branch do
-    sequence(:name) { |n| "HCM#{n}" }
-    city { 'HCM city' }
-    sequence(:address) { |n| "District #{n}" }
-    sequence(:phone) { |n| "09#{n}-#{n}#{n}#{n}#{n}-#{n}#{n}#{n}" }
-    email { Faker::Internet.email }
+    name { Faker::Name.unique.initials }
+    city { Faker::Address.city }
+    address { Faker::Address.street_address }
+    phone { Faker::PhoneNumber.cell_phone }
+    email { "#{name}@gmail.com" }
   end
 end

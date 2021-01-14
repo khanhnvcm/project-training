@@ -18,25 +18,25 @@ RSpec.describe 'Branches', type: :request do
       response
     end
 
-    context 'returns	a	200	response' do
+    context 'when :id is available' do
       let(:branch_id) { branch.id }
 
-      it 'if :id is available' do
+      it 'returns	a	200	response' do
         expect(subject).to have_http_status(200)
       end
     end
 
-    context 'returns	a	404	response' do
-      let(:branch_id) {999}
+    context 'when :id is not available' do
+      let(:branch_id) { 999 }
 
-      it 'if :id is not available' do
+      it 'returns	a	404	response' do
         expect(subject).to have_http_status(404)
       end
     end
   end
 
   describe 'GET branches#new' do
-    it 'renders the new template' do
+    it 'returns	a	200	response' do
       get new_branch_path
       expect(response).to have_http_status(200)
     end
@@ -48,18 +48,18 @@ RSpec.describe 'Branches', type: :request do
       response
     end
 
-    context 'Created successfully' do
+    context 'when created successfully' do
       let(:branch_params) { attributes_for(:branch) }
 
-      it 'create user with valid attributes' do
+      it 'returns	a	302	response' do
         expect(subject).to have_http_status(302)
       end
     end
 
-    context 'Create Failed' do
+    context 'when create failed' do
       let(:branch_params) { { name: '' } }
 
-      it 'create user with unvalid attributes' do
+      it 'renders the new template' do
         expect(subject).to render_template(:new)
       end
     end
@@ -70,19 +70,19 @@ RSpec.describe 'Branches', type: :request do
       get edit_branch_path(id: branch_id)
       response
     end
-    
-    context 'Renders the edit template' do
+
+    context 'when :id is available' do
       let(:branch_id) { branch.id }
 
-      it 'if :id is available' do
-        expect(subject).to render_template(:edit)
+      it 'returns	a	200	response' do
+        expect(subject).to have_http_status(200)
       end
     end
 
-    context 'Renders 404' do
-      let(:branch_id) {999}
+    context 'when :id is not available' do
+      let(:branch_id) { 999 }
 
-      it 'if :id is not available' do
+      it 'renders 404' do
         expect(subject).to have_http_status(404)
       end
     end
@@ -94,21 +94,20 @@ RSpec.describe 'Branches', type: :request do
       response
     end
 
-    context 'Updated successfully' do
+    context 'when updated successfully' do
       let(:branch_params) { attributes_for(:branch) }
 
-      it 'update with valid attributes' do
+      it 'returns	a	302	response' do
         expect(subject).to have_http_status(302)
       end
     end
 
-    context 'Update Failed' do
+    context 'when update failed' do
       let(:branch_params) { { name: '' } }
 
-      it 'update with unvalid attributes' do
+      it 'renders the edit template' do
         expect(subject).to render_template(:edit)
       end
     end
   end
-  
 end

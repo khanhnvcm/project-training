@@ -1,32 +1,32 @@
 require 'rails_helper'
 
-RSpec.describe 'Memories', type: :request do
+RSpec.describe 'Manufacturers', type: :request do
   include_context 'Sign in'
 
-  let(:memory) { create(:memory) }
+  let(:manufacturer) { create(:manufacturer) }
 
-  describe 'GET memories#index' do
+  describe 'GET manufacturers#index' do
     it 'returns	a	200	response' do
-      get memories_path
+      get manufacturers_path
       expect(response).to have_http_status(200)
     end
   end
 
-  describe 'GET memories#new' do
+  describe 'GET manufacturers#new' do
     it 'returns	a	200	response' do
-      get new_memory_path
+      get new_manufacturer_path
       expect(response).to have_http_status(200)
     end
   end
 
-  describe 'POST memories#create' do
+  describe 'POST manufacturers#create' do
     subject do
-      post memories_path, params: { memory: memory_params }
+      post manufacturers_path, params: { manufacturer: manufacturer_params }
       response
     end
 
     context 'when created successfully' do
-      let(:memory_params) { attributes_for(:memory) }
+      let(:manufacturer_params) { attributes_for(:manufacturer) }
 
       it 'returns	a	302	response' do
         expect(subject).to have_http_status(302)
@@ -34,7 +34,7 @@ RSpec.describe 'Memories', type: :request do
     end
 
     context 'when create failed' do
-      let(:memory_params) { { amount: '' } }
+      let(:manufacturer_params) { { name: '' } }
 
       it 'renders the new template' do
         expect(subject).to render_template(:new)
@@ -42,14 +42,14 @@ RSpec.describe 'Memories', type: :request do
     end
   end
 
-  describe 'GET memories#edit' do
+  describe 'GET manufacturers#edit' do
     subject do
-      get edit_memory_path(id: memory_id)
+      get edit_manufacturer_path(id: manufacturer_id)
       response
     end
 
     context 'when :id is available' do
-      let(:memory_id) { memory.id }
+      let(:manufacturer_id) { manufacturer.id }
 
       it 'returns	a	200	response' do
         expect(subject).to have_http_status(200)
@@ -57,7 +57,7 @@ RSpec.describe 'Memories', type: :request do
     end
 
     context 'when :id is not available' do
-      let(:memory_id) { 999 }
+      let(:manufacturer_id) { 999 }
 
       it 'renders 404' do
         expect(subject).to have_http_status(404)
@@ -65,14 +65,14 @@ RSpec.describe 'Memories', type: :request do
     end
   end
 
-  describe 'PUT memories#update' do
+  describe 'PUT manufacturers#update' do
     subject do
-      put memory_path(memory), params: { memory: memory_params }
+      put manufacturer_path(manufacturer), params: { manufacturer: manufacturer_params }
       response
     end
 
     context 'when updated successfully' do
-      let(:memory_params) { attributes_for(:memory) }
+      let(:manufacturer_params) { attributes_for(:manufacturer) }
 
       it 'returns	a	302	response' do
         expect(subject).to have_http_status(302)
@@ -80,7 +80,7 @@ RSpec.describe 'Memories', type: :request do
     end
 
     context 'when update failed' do
-      let(:memory_params) { { amount: '' } }
+      let(:manufacturer_params) { { name: '' } }
 
       it 'renders the edit template' do
         expect(subject).to render_template(:edit)

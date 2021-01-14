@@ -7,9 +7,11 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
+
   config.before do
     DatabaseCleaner.start
   end
+
   config.after do
     DatabaseCleaner.clean
   end
