@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     if params[:create_and_add]
       redirect_to new_product_path, notice: 'Created successfully'
     else
-      redirect_to products_path
+      redirect_to products_path, notice: 'Created successfully'
     end
   end
 
