@@ -52,7 +52,7 @@ jobs:
           command: bundle exec rails db:create db:schema:load --trace
       - run:
           name: Precompile
-          command: rake assets:precompile
+          command: bundle exec rake assets:precompile
       - run:
           name: Factory Lint
           command: bin/rake factory_bot:lint
