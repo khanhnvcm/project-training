@@ -51,6 +51,9 @@ jobs:
           name: Setup DB
           command: bundle exec rails db:create db:schema:load --trace
       - run:
+          name: Precompile
+          command: rake assets:precompile
+      - run:
           name: Factory Lint
           command: bin/rake factory_bot:lint
       - run:
