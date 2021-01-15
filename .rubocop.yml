@@ -4,6 +4,7 @@ AllCops:
   Exclude:
    - 'db/**/*'
    - 'config/**/*'
+   - 'vendor/**/*'
    - 'script/**/*'
    - 'bin/{rails,rake,bundle}'
    - 'node_modules/**/*'
