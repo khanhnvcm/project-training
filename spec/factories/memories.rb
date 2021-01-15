@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :memory do
-    amount { (2 ** Faker::Number.unique.between(from: 3, to: 8)).to_s + ' GB' }
+    amount { (Faker::Number.unique.between(from: 2, to: 1024)).to_s + ' GB' }
   end
 end
