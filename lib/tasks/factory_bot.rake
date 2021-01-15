@@ -7,7 +7,7 @@ namespace :factory_bot do
     begin
       DatabaseCleaner[:active_record].strategy = :transaction
       DatabaseCleaner[:active_record].clean_with(:truncation)
-      Rake::Task['db:seed'].invoke
+      # Rake::Task['db:seed'].invoke
       DatabaseCleaner.start
       FactoryBot.lint
     ensure
