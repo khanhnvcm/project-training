@@ -50,12 +50,9 @@ jobs:
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:schema:load --trace
-      # - run:
-      #     name: Factory Lint
-      #     command: bin/rake factory_bot:lint
       - run:
-          name: Precompile assets for test environment
-          command: NODE_ENV=test bundle exec rails webpacker:compile
+          name: Factory Lint
+          command: bin/rake factory_bot:lint
       - run:
           name: RSpec
           command: |

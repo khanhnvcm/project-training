@@ -6,7 +6,7 @@ FactoryBot.define do
     branch
     status
     employee
-    imei { Faker::Device.serial }
+    imei { Faker::Device.unique.serial }
     serial_number { Faker::Number.number(digits: 10) }
     price { rand(40..60) * 10 }
   end
