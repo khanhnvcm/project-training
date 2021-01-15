@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :manufacturer do
-    name { Faker::Device.unique.model_name.split.first }
+    name { Faker::Device.unique.manufacturer }
   end
 end
