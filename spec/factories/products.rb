@@ -10,4 +10,8 @@ FactoryBot.define do
     serial_number { Faker::Number.number(digits: 10) }
     price { rand(40..60) * 10 }
   end
+
+  after(:create) do
+    
+  end
 end
