@@ -50,17 +50,15 @@ jobs:
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:schema:load --trace
-      # - run:
-      #     name: Precompile
-      #     command: bundle exec rake assets:precompile
+      - run:
+          name: Precompile
+          command: bundle exec rake assets:precompile
       - run:
           name: Factory Lint
           command: bin/rake factory_bot:lint
       - run:
-          name: RSpec
-          command: |
-            bundle exec rspec --profile 10 \
-                              --format progress
+          name: Rubocop
+          command: bundle exec rubocop
       - store_artifacts:
           path: coverage
       - save_cache:
@@ -72,21 +70,23 @@ jobs:
           paths:
             - ./project_training
 
-  rubocop:
+  rspec:
     executor: default
     steps:
       - attach_workspace:
           at: ~/
       - configure_bundler
       - run:
-          name: Rubocop
-          command: bundle exec rubocop
+          name: Rspec
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format progress
 
 workflows:
   version: 2
   integration:
     jobs:
       - build
-      - rubocop:
+      - rspec:
           requires:
             - build

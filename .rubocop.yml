@@ -18,4 +18,5 @@ Style/FrozenStringLiteralComment:
 Style/CommentedKeyword:
   Enabled: false
 Metrics/BlockLength:
-  Enabled: false
+  Exclude:
+    - 'spec/requests/**/*'
