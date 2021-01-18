@@ -45,18 +45,6 @@ jobs:
           name: Install bundle
           command: bundle install
       - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
-      - run:
-          name: Setup DB
-          command: bundle exec rails db:create db:schema:load --trace
-      - run:
-          name: Precompile
-          command: bundle exec rake assets:precompile
-      - run:
-          name: Factory Lint
-          command: bin/rake factory_bot:lint
-      - run:
           name: Rubocop
           command: bundle exec rubocop
       - store_artifacts:
@@ -76,6 +64,18 @@ jobs:
       - attach_workspace:
           at: ~/
       - configure_bundler
+       - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      - run:
+          name: Setup DB
+          command: bundle exec rails db:create db:schema:load --trace
+      - run:
+          name: Precompile
+          command: bundle exec rake assets:precompile
+      - run:
+          name: Factory Lint
+          command: bin/rake factory_bot:lint
       - run:
           name: Rspec
           command: |
