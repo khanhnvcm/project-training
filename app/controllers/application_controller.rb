@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   protect_from_forgery with: :exception
 
@@ -11,6 +16,10 @@ class ApplicationController < ActionController::Base
 
   def record_not_found
     render file: 'public/404.html', status: :not_found, layout: false
+  end
+
+  def user_not_authorized
+    redirect_to root_path, alert: 'Not Authorized'
   end
 
   protected
