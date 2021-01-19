@@ -4,7 +4,6 @@ class EmployeesController < ApplicationController
 
   def index
     @employees = Employee.all
-    authorize @employees
   end
 
   def show
