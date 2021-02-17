@@ -2,6 +2,13 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
 
+### Admin user
+User.create(
+  email: 'admin@gmail.com',
+  password: '123456'
+)
+User.last.add_role :admin
+
 ### Branches
 (1..4).each do |x|
   Branch.create(
@@ -81,5 +88,10 @@ end
     imei: imei_value,
     serial_number: serial_value,
     employee_id: Employee.pluck(:id).sample
+  )
+
+  ImportHistory.create(
+    product_id: Product.last.id,
+    branch_id: Product.last.branch_id
   )
 end

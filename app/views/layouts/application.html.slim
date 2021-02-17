@@ -40,7 +40,8 @@ html
         .alert.alert-danger = alert
     
     .row.header
-      .col-11.text-right
+      .col-10
+      .col-1
         - if user_signed_in?
           span.account= current_user.email
           br
