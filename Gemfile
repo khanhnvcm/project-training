@@ -45,6 +45,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
