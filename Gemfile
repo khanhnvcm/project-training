@@ -10,11 +10,6 @@ ruby '2.7.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 
 #
-# Database, ORM, Model, etc
-#
-gem 'mysql2', '>= 0.4.4'
-
-#
 # Web servers
 #
 gem 'puma', '~> 4.1'
@@ -50,6 +45,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'mysql2', '>= 0.4.4'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
