@@ -45,7 +45,6 @@ group :production do
 end
 
 group :development, :test do
-  gem 'mysql2', '>= 0.4.4'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
@@ -54,6 +53,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'mysql2', '>= 0.4.4'
   gem 'annotate'
   gem 'better_errors'
   gem 'bullet'
