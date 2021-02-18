@@ -12,3 +12,11 @@ development:
 test:
   <<: *default
   url: mysql2://root:@127.0.0.1:3306/project_training_test
+
+production:
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  encoding: unicode
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS', 40) %>
