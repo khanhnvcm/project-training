@@ -369,7 +369,7 @@ DEPENDENCIES
   kaminari
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
-  pg (~> 1.2.3)
+  pg
   puma (~> 4.1)
   pundit
   rails (~> 6.0.3, >= 6.0.3.4)

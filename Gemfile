@@ -46,7 +46,7 @@ gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 
 group :production do
-  gem 'pg', '~> 1.2.3'
+  gem 'pg'
 end
 
 group :development, :test do
