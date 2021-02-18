@@ -6,6 +6,9 @@ default: &default
   pool: <%= ENV["PUMA_MAX_THREADS"] || 5 %>
   url: mysql2://root:@127.0.0.1:3306/project_training
 
+production:
+  <<: *default
+
 development:
   <<: *default
 
