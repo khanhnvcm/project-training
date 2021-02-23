@@ -1,13 +1,12 @@
 doctype html
 html
   head
-  body
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
-    title ProjectTraining
+    title UsedSmartphone
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-eval' => false
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_pack_tag 'application'
     
     /Carousel
     script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" 
@@ -16,7 +15,7 @@ html
     script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"
 
     javascript:
-      $(document).on('turbolinks:load', function() {
+      $(document).ready(function() {
 
         $('.alert' ).fadeOut(3000);
 
